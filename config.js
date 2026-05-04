@@ -65,7 +65,7 @@ window.invitationConfig = {
     giftGuidePanel: true,
     reminderPanel: true,
     rsvpSecondaryButton: true,
-    closingImage: true
+    closingImage: false
   },
   event: {
     isoDate: "2027-04-06T16:30:00+02:00",
@@ -155,9 +155,9 @@ window.invitationConfig = {
   },
   gallery: {
     items: [
-      { label: "Portrait one", src: "assets/images/gallery-01.svg", ratio: "portrait", enabled: true },
-      { label: "Portrait two", src: "assets/images/gallery-02.svg", ratio: "portrait", enabled: true },
-      { label: "Detail photo", src: "assets/images/gallery-03.svg", ratio: "square", enabled: true }
+      { label: "Portrait one", src: "assets/images/gallery-01.jpeg", ratio: "portrait", enabled: true },
+      { label: "Portrait two", src: "assets/images/gallery-02.jpeg", ratio: "portrait", enabled: true },
+      { label: "Detail photo", src: "assets/images/gallery-03.jpeg", ratio: "square", enabled: true }
     ]
   },
   assets: {
