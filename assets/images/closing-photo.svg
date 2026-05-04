@@ -1,0 +1,8 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="900" rx="28" fill="#200305"/>
+  <rect x="64" y="64" width="1272" height="772" rx="20" fill="#5A070D"/>
+  <circle cx="1088" cy="238" r="144" fill="#F2C46D" fill-opacity="0.88"/>
+  <path d="M150 652C300 552 456 478 678 398C854 334 1012 232 1180 114V770H142C142 718 146 680 150 652Z" fill="#922B15"/>
+  <path d="M168 570C328 494 438 452 596 408" stroke="#FFD88B" stroke-width="18" stroke-linecap="round"/>
+  <text x="112" y="146" fill="#FFF1DF" font-family="Georgia, serif" font-size="34" letter-spacing="6">CLOSING IMAGE</text>
+</svg>

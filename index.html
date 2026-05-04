@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2d0507">
+  <title>Birthday Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="opening-screen" id="openingScreen" aria-live="polite">
+    <div class="opening-screen__card">
+      <p class="opening-screen__eyebrow" data-bind="openingEyebrow"></p>
+      <button class="envelope-button" id="openInvitationButton" type="button" aria-label="Open invitation">
+        <span class="envelope-button__top"></span>
+        <span class="envelope-button__paper">
+          <span data-bind="openingTitle"></span>
+          <small data-bind="openingSubtitle"></small>
+        </span>
+        <span class="envelope-button__seal"></span>
+      </button>
+      <p class="opening-screen__hint" data-bind="openingHint"></p>
+    </div>
+  </div>
+
+  <div class="scene-decor" id="sceneDecor" aria-hidden="true">
+    <div class="glow glow--one"></div>
+    <div class="glow glow--two"></div>
+    <div class="arc-lines arc-lines--one"></div>
+    <div class="arc-lines arc-lines--two"></div>
+    <div class="spark spark--one"></div>
+    <div class="spark spark--two"></div>
+    <div class="spark spark--three"></div>
+  </div>
+
+  <div class="page-shell" id="pageShell">
+    <header class="topbar reveal">
+      <p class="topbar__label" data-bind="brandingTag"></p>
+      <button class="audio-pill" id="floatingAudioToggle" type="button" aria-label="Toggle music">
+        <span class="audio-pill__dot"></span>
+        <span class="audio-pill__label">Sound Off</span>
+      </button>
+    </header>
+
+    <main id="app"></main>
+  </div>
+
+  <div class="modal-backdrop" id="rsvpModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="rsvpModalTitle">
+      <button class="modal-close" id="closeRsvpModal" type="button" aria-label="Close RSVP form">×</button>
+      <p class="section-kicker" data-bind="formEyebrow"></p>
+      <h2 class="section-title modal-title" id="rsvpModalTitle" data-bind="formTitle"></h2>
+      <p class="modal-copy" data-bind="formIntro"></p>
+      <form class="rsvp-form" id="rsvpForm">
+        <div class="rsvp-form__grid" id="rsvpFormFields"></div>
+        <button class="button button--gold" id="rsvpSubmitButton" type="submit" data-bind="formSubmitLabel"></button>
+      </form>
+      <p class="modal-feedback" id="rsvpFormFeedback" data-bind="formSuccessMessage" hidden></p>
+    </div>
+  </div>
+
+  <template id="hero-template">
+    <section class="hero section">
+      <div class="hero-card reveal">
+        <div class="poster-decor poster-decor--top" data-decor="posterTopLines"></div>
+        <div class="poster-decor poster-decor--bottom" data-decor="posterBottomLines"></div>
+        <p class="hero-kicker" data-bind="heroKicker"></p>
+        <h1 class="hero-name" data-bind="celebrantName"></h1>
+        <p class="hero-age" data-bind="heroAgeLine"></p>
+        <div class="hero-date-grid">
+          <div class="hero-date-grid__side">
+            <span class="hero-date-grid__label" data-bind="heroWeekday"></span>
+          </div>
+          <div class="hero-date-grid__center">
+            <span class="hero-date-grid__month" data-bind="heroMonth"></span>
+            <strong class="hero-date-grid__day" data-bind="heroDay"></strong>
+          </div>
+          <div class="hero-date-grid__side">
+            <span class="hero-date-grid__label" data-bind="heroTime"></span>
+          </div>
+        </div>
+        <p class="hero-venue" data-bind="heroVenue"></p>
+        <div class="hero-actions">
+          <a class="button button--gold" data-bind="heroPrimaryLabel" data-bind-href="heroPrimaryUrl"></a>
+          <a class="button button--ghost" data-bind="heroSecondaryLabel" data-bind-href="heroSecondaryUrl"></a>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="music-template">
+    <section class="section music-section reveal">
+      <div class="music-header">
+        <p class="section-kicker" data-bind="musicEyebrow"></p>
+        <h2 class="section-script" data-bind="musicTitle"></h2>
+      </div>
+      <div class="music-card">
+        <div class="record-visual" data-decor="recordVisual">
+          <div class="record-visual__disc"></div>
+        </div>
+        <div class="music-copy">
+          <p class="music-copy__message" data-bind="musicMessage"></p>
+          <div class="music-meta">
+            <span data-bind="musicTrackTitle"></span>
+            <span data-bind="musicTrackArtist"></span>
+          </div>
+        </div>
+        <div class="music-controls">
+          <button class="button button--gold" id="playButton" type="button">Play</button>
+          <div class="music-progress">
+            <input id="progressBar" type="range" min="0" max="100" value="0" aria-label="Music progress">
+            <div class="music-progress__time">
+              <span id="currentTime">0:00</span>
+              <span id="duration">0:00</span>
+            </div>
+          </div>
+        </div>
+        <audio id="invitationAudio" preload="metadata"></audio>
+      </div>
+    </section>
+  </template>
+
+  <template id="countdown-template">
+    <section class="section countdown-section reveal">
+      <p class="section-kicker" data-bind="countdownEyebrow"></p>
+      <h2 class="section-script" data-bind="countdownTitle"></h2>
+      <div class="countdown-wave" data-decor="countdownWave"></div>
+      <div class="countdown-grid" id="countdownGrid"></div>
+    </section>
+  </template>
+
+  <template id="guidelines-template">
+    <section class="section guidelines-section reveal">
+      <div class="guidelines-intro">
+        <p class="section-kicker" data-bind="guidelinesEyebrow"></p>
+        <h2 class="section-title" data-bind="guidelinesTitle"></h2>
+        <p class="guidelines-text" data-bind="guidelinesText"></p>
+      </div>
+      <div class="guidelines-card">
+        <div class="guidelines-card__grid">
+          <article class="info-panel" data-panel="venue">
+            <h3 data-bind="venueTitle"></h3>
+            <p data-bind="venueText"></p>
+            <a class="button button--ink" data-bind="venueButtonLabel" data-bind-href="venueButtonUrl"></a>
+          </article>
+          <article class="info-panel" data-panel="dressCode">
+            <h3 data-bind="dressCodeTitle"></h3>
+            <p data-bind="dressCodeText"></p>
+          </article>
+          <article class="info-panel" data-panel="giftGuide">
+            <h3 data-bind="giftGuideTitle"></h3>
+            <p data-bind="giftGuideText"></p>
+          </article>
+          <article class="info-panel" data-panel="reminder">
+            <h3 data-bind="reminderTitle"></h3>
+            <p data-bind="reminderText"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="gallery-template">
+    <section class="section gallery-section reveal">
+      <p class="section-kicker" data-bind="galleryEyebrow"></p>
+      <h2 class="section-title" data-bind="galleryTitle"></h2>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+  </template>
+
+  <template id="rsvp-template">
+    <section class="section rsvp-section reveal">
+      <div class="rsvp-card">
+        <p class="section-kicker" data-bind="rsvpEyebrow"></p>
+        <h2 class="section-title" data-bind="rsvpTitle"></h2>
+        <p class="guidelines-text" data-bind="rsvpText"></p>
+        <div class="rsvp-actions">
+          <button class="button button--gold" type="button" data-action="open-rsvp-modal" data-bind="rsvpPrimaryLabel"></button>
+          <a class="button button--ghost" data-bind="rsvpSecondaryLabel" data-bind-href="rsvpSecondaryUrl"></a>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="closing-template">
+    <section class="section closing-section reveal">
+      <div class="closing-image" data-image="closingImage"></div>
+      <div class="closing-copy">
+        <p class="section-kicker" data-bind="closingEyebrow"></p>
+        <h2 class="section-script" data-bind="closingTitle"></h2>
+        <p class="guidelines-text" data-bind="closingText"></p>
+      </div>
+    </section>
+  </template>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<svg width="900" height="1200" viewBox="0 0 900 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1200" rx="34" fill="#250507"/>
+  <rect x="58" y="58" width="784" height="1084" rx="22" fill="#4A0910"/>
+  <circle cx="642" cy="312" r="132" fill="#F2C46D" fill-opacity="0.9"/>
+  <path d="M130 868C266 741 380 664 546 580C664 520 737 434 772 302V1044H130V868Z" fill="#874016"/>
+  <path d="M156 812C266 710 350 652 472 598" stroke="#FFD88B" stroke-width="16" stroke-linecap="round"/>
+  <text x="106" y="152" fill="#FFF1DF" font-family="Georgia, serif" font-size="34" letter-spacing="6">PHOTO 01</text>
+</svg>
